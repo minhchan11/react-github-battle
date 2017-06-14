@@ -1,17 +1,21 @@
 {
   "name": "github-battle",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open"
   },
-  "babel" : {
-    "presets" : ["env","react"]
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "on-build-webpack": "^0.1.0",
+    "prop-types": "^15.5.10",
     "react": "^15.6.0",
     "react-dom": "^15.6.0"
   },
@@ -25,5 +29,6 @@
     "style-loader": "^0.18.2",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
-  }
+  },
+  "description": ""
 }
