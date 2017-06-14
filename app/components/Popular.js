@@ -1,4 +1,30 @@
 var React = require('react');
+var PropTypes = require('prop-types');
+
+//this is a function because all it does is rendering UI
+// passing in props to prevent the use of 'this', thus specifying that the component function only works here
+function LanguageSelection(props) {
+    var languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
+    return(
+      <ul className="languages">
+       {languages.map((language) => {
+         return  (
+           <li
+           style ={language === props.selectedLanguage? {color: '#d0021b'} : null}
+           onClick = {props.onSelect.bind(null, language)}
+           key={language} >
+           {language}
+           </li>
+         )
+       })}
+      </ul>
+    )
+}
+
+LanguageSelection.propTypes = {
+    selectedLanguage : PropTypes.string.isRequired,
+    onSelect : PropTypes.func.isRequired
+}
 
 class Popular extends React.Component {
   constructor(props) {
@@ -7,7 +33,8 @@ class Popular extends React.Component {
       selectedLanguage: 'All'
     };
     //established the initial state of this component
-    this.updateLanguage = this.updateLanguage.bind(this); //bind the update language to whatever its called
+    this.updateLanguage = this.updateLanguage.bind(this);
+    //bind the update language to whatever its called
   }
   updateLanguage(lang){
     this.setState(function(){
@@ -17,24 +44,12 @@ class Popular extends React.Component {
     });
   }
   render() {
-    var languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
     return (
       <div>
-      {/* <p>selected: {this.state.selectedLanguage}</p> this to show if change state worked */}
-       <ul className="languages">
-        {languages.map((language) => {
-          return  (
-            <li
-            style ={language === this.state.selectedLanguage? {color: '#d0021b'} : null}
-            onClick = {this.updateLanguage.bind(null, language)}
-            key={language} >
-            {language}
-            </li>
-          )
-        })}
-        {/* this.updateLanguage.bind(null. language) bind the function to the current language item*/}
-        {/* calling it on the current context, you have to call 'this' as a parameter on the map function, otherwise it will not know what 'this' is. So fat arrow helps to eliminate the need for 'this'*/}
-       </ul>
+        <LanguageSelection
+          selectedLanguage = {this.state.selectedLanguage}
+          onSelect = {this.updateLanguage}
+        />
       </div>
     )
   }

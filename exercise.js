@@ -154,6 +154,21 @@ class Users extends React.Component {
   }
 }
 
+//2nd way: make stateless functional Component
+// var React = require('react');
+// function FriendItem (props) {
+//   return <li>{props.friend}</li>
+// }
+// function FriendsList (props) {
+//   return (
+//     <h1>Friends:</h1>
+//     <ul>
+//       {props.friends.map((friend, index) => <FriendItem friend={friend} key={friend} />)}
+//     </ul>
+//   )
+// }
+// module.exports = FriendsList
+
 ReactDOM.render(
   <Users list={[
     { name: 'Tyler', friend: true },
@@ -270,3 +285,25 @@ ReactDOM.render(
     img={{ 'image': 'https://avatars0.githubusercontent.com/u/2933430?v=3&s=460'}} />,
   document.getElementById('app')
 );
+
+//Set state using bind
+// This is to set state right on the parent component
+var languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
+return (
+  <div>
+  {/* <p>selected: {this.state.selectedLanguage}</p> this to show if change state worked */}
+   <ul className="languages">
+    {languages.map((language) => {
+      return  (
+        <li
+        style ={language === this.state.selectedLanguage? {color: '#d0021b'} : null}
+        onClick = {this.updateLanguage.bind(null, language)}   /* this.updateLanguage.bind(null. language) bind the function to the current language item*/
+        key={language} >
+        {language}
+        </li>
+      )
+    })}
+    /* calling it on the current context, you have to call 'this' as a parameter on the map function, otherwise it will not know what 'this' is[map(function(language){}, this)]. So fat arrow helps to eliminate the need for 'this'*/
+
+   </ul>
+  </div>
