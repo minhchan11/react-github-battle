@@ -7,7 +7,7 @@ class Badge extends React.Component {
     return (
       <div>
         <img
-          src={this.prop.img}
+          src={this.props.img}
           alt="Avatar"
           style={{width: 100, height:100}}
           />
@@ -20,8 +20,8 @@ class Badge extends React.Component {
 
 ReactDOM.render(
   <Badge
-    name="Tyler",
-    username="something",
+    name="Tyler"
+    username="something"
     img='https://avatars0.githubusercontent.com/u/2933430?v=3&s=460'/>,
   document.getElementById('app')
 );
