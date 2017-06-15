@@ -22,6 +22,11 @@ function LanguageSelection(props) {
     )
 }
 
+LanguageSelection.propTypes = {
+    selectedLanguage : PropTypes.string.isRequired,
+    onSelect : PropTypes.func.isRequired
+}
+
 function RepoGrid(props){
   return(
     <ul className="popular-list">
@@ -54,10 +59,7 @@ RepoGrid.propTypes = {
 
 }
 
-LanguageSelection.propTypes = {
-    selectedLanguage : PropTypes.string.isRequired,
-    onSelect : PropTypes.func.isRequired
-}
+
 
 class Popular extends React.Component {
   constructor(props) {
