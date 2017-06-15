@@ -41,3 +41,13 @@ li {
   font-size: 20px;
   margin: 10px;
 }
+
+.navbar-default .navbar-nav>li>a  {
+  color: #7e79c6;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
