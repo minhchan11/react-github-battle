@@ -64,3 +64,13 @@ li {
   font-size: 3em;
   font-weight: 100;
 }
+
+.battle {
+  max-width: 50%;
+}
+
+.aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
