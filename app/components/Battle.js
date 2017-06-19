@@ -1,33 +1,7 @@
 var React = require('react');
 var PropTypes = require('prop-types');
 var RLink = require('react-router-dom').Link;
-
-function PlayerPreview(props){
-  return(
-    <div>
-      <div className='column'>
-        <img
-          className='avatar'
-          src={props.avatar}
-          alt={'Avatar for ' + props.username}
-        />
-        <h5 className='username'>@{props.username}</h5>
-      </div>
-      <button
-        className = 'btn btn-danger btn-block'
-        onClick = {props.onReset.bind(null, props.id)}>
-          Choose another Player
-      </button>
-    </div>
-  )
-}
-
-PlayerPreview.propTypes = {
-  avatar: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired
-}
+var PlayerPreview = require('./PlayerPreview');
 
 class PlayerInput extends React.Component{
   constructor(props){
@@ -130,6 +104,38 @@ class Battle extends React.Component {
 
 
     //if playerOneName is empty string, then render the form
+    //bind(this, for handle reset ) because PlayerPreview is a child element
+    // Previously, onReset was in parent element
+    // onReset={this.handleReset}
+    // id='playerTwo'
+
+    // PlayerPreview as included in parent element
+    // function PlayerPreview(props){
+    //   return(
+    //     <div>
+    //       <div className='column'>
+    //         <img
+    //           className='avatar'
+    //           src={props.avatar}
+    //           alt={'Avatar for ' + props.username}
+    //         />
+    //         <h5 className='username'>@{props.username}</h5>
+    //       </div>
+    //       <button
+    //         className = 'btn btn-danger btn-block'
+    //         onClick = {props.onReset.bind(null, props.id)}>
+    //           Choose another Player
+    //       </button>
+    //     </div>
+    //   )
+    // }
+    //
+    // PlayerPreview.propTypes = {
+    //   avatar: PropTypes.string.isRequired,
+    //   username: PropTypes.string.isRequired,
+    //   id: PropTypes.string.isRequired,
+    //   onReset: PropTypes.func.isRequired
+    // }
       return(
         <div>
           <div className='row'>
@@ -142,11 +148,14 @@ class Battle extends React.Component {
 
             {playerOneImage !== null &&
               <PlayerPreview
-                  avatar={playerOneImage}
-                  username={playerOneName}
-                  onReset={this.handleReset}
-                  id='playerOne'
-              />}
+              avatar={playerOneImage}
+              username={playerOneName}>
+                <button
+                  className='reset'
+                  onClick={this.handleReset.bind(this, 'playerOne')}>
+                    Reset
+                </button>
+            </PlayerPreview>}
 
             {!playerTwoName &&
               <PlayerInput
@@ -155,13 +164,16 @@ class Battle extends React.Component {
                 onSubmit={this.handleSubmit}
               />}
 
-            {playerTwoImage !== null &&
+              {playerTwoImage !== null &&
               <PlayerPreview
-                  avatar={playerTwoImage}
-                  username={playerTwoName}
-                  onReset={this.handleReset}
-                  id='playerTwo'
-              />}
+                avatar={playerTwoImage}
+                username={playerTwoName}>
+                  <button
+                    className='reset'
+                    onClick={this.handleReset.bind(this, 'playerTwo')}>
+                      Reset
+                  </button>
+              </PlayerPreview>}
           </div>
 
           {playerOneImage && playerTwoImage &&

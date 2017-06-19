@@ -1,6 +1,8 @@
 var React = require('react');
 var PropTypes = require('prop-types');
 var api = require('../utils/api');
+var Loading = require('./Loading');
+
 
 //this is a function because all it does is rendering UI
 // passing in props to prevent the use of 'this', thus specifying that the component function only works here
@@ -99,7 +101,7 @@ class Popular extends React.Component {
           onSelect = {this.updateLanguage}
         />
         {!this.state.repos
-          ? <p>Loading</p>
+          ? <Loading text='DOWNLOADING' speed={400}/>
           : <RepoGrid repos = {this.state.repos}/>
         }
       </div>
